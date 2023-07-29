@@ -5,7 +5,35 @@
     <div class="col-md-6 offset-md-3">
        {% if user.is_authenticated  %}
        
-            <h1>Hello World </h1>
+            <h1>Customers </h1>
+            <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if customers %}
+                        {% for customer in customers  %}
+                            <tr>
+                                
+                               <td> <a href="{% url 'customer' customer.id %}">{{ customer.id }} </a></td>
+                                <td>{{ customer.first_name }}</td>
+                                <td>{{ customer.last_name }}</td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.phone }}</td>
+                                <td>{{ customer.address }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            
         {% else %}
             <h1> Login </h1>
             <form method="POST" action="{% url 'home' %}">
